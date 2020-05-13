@@ -37,25 +37,25 @@ namespace DimitarYanakev_S00189753
 
         private void lbxPhones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Phones selectCharacter = lbxSelect.SelectedItem as Phones;
+            Phones selectPhone = lbxSelect.SelectedItem as Phones;
 
             //Check for null
-            if (selectCharacter != null)
+            if (selectPhone != null)
             {
                 //Display Band Info
-                string BandText = $"{selectCharacter.Name}";
-                txtbxPhones.Text = BandText;
+                string Text = $"{selectPhone.Name}";
+                txtbxPhones.Text = Text;
 
                 //Display Band Image
                 Image.Source = new BitmapImage(new Uri($"/images/{selectCharacter.Phone_Image}", UriKind.Relative));
 
 
                 //Punishers Section
-                var punish = from b in db.Phones
-                             where b.PhoneID == selectCharacter.ID
-                             select b.Punishers;
+                var phones = from b in db.Phones
+                             where b.PhoneID == selectCharacter.PhoneID
+                             select b.Name;
 
-                lbxPunish.ItemsSource = punish.ToList();
+                lbxPhones.ItemsSource = phones.ToList();
             }
         }
     }
