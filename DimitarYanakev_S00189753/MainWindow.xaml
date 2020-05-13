@@ -6,27 +6,28 @@
         xmlns:local="clr-namespace:DimitarYanakev_S00189753"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Loaded="Window_Loaded">
-
+        Loaded="Window_Loaded"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    
     <Window.Resources>
         <DataTemplate x:Key="listboxTemplate">
 
             <StackPanel Orientation="Horizontal" Margin="5">
 
-                <Image Source="{Binding OS_Image}" Width="75"/>
+                <Image Source="{Binding Phone_Image}" Width="75"/>
 
                 <StackPanel>
                     <TextBlock Text="{Binding Name}" Margin="5" FontSize="12"/>
                 </StackPanel>
-                
-                
+
             </StackPanel>
 
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <ListBox x:Name="lbxPhones" HorizontalAlignment="Left" Height="250" Margin="50,50,0,0" VerticalAlignment="Top" Width="450" ItemTemplate="{StaticResource listboxTemplate}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="550,50,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="50" Width="200"/>
+        <ListBox x:Name="txtbxPhones" HorizontalAlignment="Left" Margin="550,50,0,0" VerticalAlignment="Top" Height="50" Width="200"/>
         <Image HorizontalAlignment="Left" Height="200" Margin="550,100,0,0" VerticalAlignment="Top" Width="200"/>
     </Grid>
 </Window>

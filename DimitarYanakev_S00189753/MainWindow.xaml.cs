@@ -20,7 +20,7 @@ namespace DimitarYanakev_S00189753
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Phone> phones = new List<Phone>();
+        PhoneData db = new PhoneData();
         public MainWindow()
         {
             InitializeComponent();
@@ -28,9 +28,35 @@ namespace DimitarYanakev_S00189753
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Phone p1 = new Phone() { "Samsung S20", 500, "Android", "/images/android.png", "/images/s20.jpg" };
-            Phone p2 = new Phone() { "iPhone 11", 600, "IOS", "/images/apple.png", "/images/iphone11.jpg" };
+            var query = from t in db.Phones
+                        select t.Name;
 
+            lbxPhones.ItemsSource = query.ToList();
+
+        }
+
+        private void lbxPhones_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Phones selectCharacter = lbxSelect.SelectedItem as Phones;
+
+            //Check for null
+            if (selectCharacter != null)
+            {
+                //Display Band Info
+                string BandText = $"{selectCharacter.Name}";
+                txtbxPhones.Text = BandText;
+
+                //Display Band Image
+                Image.Source = new BitmapImage(new Uri($"/images/{selectCharacter.Phone_Image}", UriKind.Relative));
+
+
+                //Punishers Section
+                var punish = from b in db.Phones
+                             where b.PhoneID == selectCharacter.ID
+                             select b.Punishers;
+
+                lbxPunish.ItemsSource = punish.ToList();
+            }
         }
     }
 }
